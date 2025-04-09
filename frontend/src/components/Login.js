@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FiUser, FiLock } from 'react-icons/fi';
 import axios from 'axios';
@@ -9,11 +9,21 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${backendUrl}/login`, { username, password });
+            const response = await axios.post(`${backendUrl}/login`, {
+                username,
+                password
+            });
             localStorage.setItem('authToken', response.data.token);
             window.location.href = '/';
         } catch (err) {
@@ -24,7 +34,7 @@ const Login = () => {
     return (
         <div className="auth-container">
             <form className="auth-form" onSubmit={handleLogin}>
-                <h2>Ласкаво просимо!</h2>
+                <h2>Увійти в систему</h2>
 
                 <div className="input-group">
                     <FiUser className="input-icon" />
@@ -50,10 +60,10 @@ const Login = () => {
 
                 {error && <p className="error-message">{error}</p>}
 
-                <button type="submit" className="auth-button">Увійти</button>
+                <button type="submit" className="auth-button">Продовжити</button>
 
                 <div className="switch-link">
-                    Немає акаунта? <Link to="/register" className="link">Створити</Link>
+                    Немає акаунта? <Link to="/register" className="link">Зареєструватися</Link>
                 </div>
             </form>
         </div>
