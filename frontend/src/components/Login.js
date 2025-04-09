@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import backendUrl from '..//config';
+import { Link } from 'react-router-dom';
+import backendUrl from '../config';
 import './CSS/Login.css';
 
 const Login = () => {
@@ -20,24 +21,28 @@ const Login = () => {
     };
 
     return (
-        <div className="login-container">
-            <form className="login-form" onSubmit={handleLogin}>
+        <div className="auth-container">
+            <form className="auth-form" onSubmit={handleLogin}>
+                <h2>Ласкаво просимо!</h2>
                 <input
                     type="text"
-                    placeholder="Username"
+                    placeholder="Ваш логін"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                 />
                 <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Пароль"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
                 {error && <p className="error-message">{error}</p>}
-                <button type="submit">Login</button>
+                <button type="submit" className="auth-button">Увійти</button>
+                <div className="switch-link">
+                    Немає акаунта? <Link to="/register" className="link">Створити</Link>
+                </div>
             </form>
         </div>
     );
