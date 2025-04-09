@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiUser, FiLock } from 'react-icons/fi';
+import { FiUser, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 import axios from 'axios';
 import backendUrl from '../config';
 import './CSS/Login.css';
@@ -9,13 +9,7 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [, setWindowWidth] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const handleResize = () => setWindowWidth(window.innerWidth);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -50,12 +44,19 @@ const Login = () => {
                 <div className="input-group">
                     <FiLock className="input-icon" />
                     <input
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Пароль"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    <button
+                        type="button"
+                        className="password-toggle"
+                        onClick={() => setShowPassword(!showPassword)}
+                    >
+                        {showPassword ? <FiEyeOff /> : <FiEye />}
+                    </button>
                 </div>
 
                 {error && <p className="error-message">{error}</p>}

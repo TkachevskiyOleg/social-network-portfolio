@@ -13,7 +13,6 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Головний контейнер */
 .auth-container {
     display: flex;
     justify-content: center;
@@ -26,7 +25,6 @@
     padding: 20px;
 }
 
-/* Анімований фон */
 .auth-container::before {
     content: '';
     position: absolute;
@@ -46,7 +44,6 @@
     100% { transform: rotate(360deg); }
 }
 
-/* Форма */
 .auth-form {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
@@ -69,7 +66,6 @@
     letter-spacing: 1px;
 }
 
-/* Поля вводу */
 .input-group {
     position: relative;
     margin: 1.5rem 0;
@@ -93,7 +89,6 @@
     box-shadow: 0 0 15px rgba(45, 140, 255, 0.3);
 }
 
-/* Іконки */
 .input-icon {
     position: absolute;
     left: 16px;
@@ -104,7 +99,6 @@
     pointer-events: none;
 }
 
-/* Кнопка */
 .auth-button {
     width: 100%;
     padding: 14px;
@@ -124,7 +118,6 @@
     box-shadow: 0 5px 15px rgba(45, 140, 255, 0.3);
 }
 
-/* Повідомлення про помилку */
 .error-message {
     color: #ff6b6b;
     text-align: center;
@@ -132,7 +125,6 @@
     font-size: 0.9rem;
 }
 
-/* Посилання */
 .switch-link {
     text-align: center;
     margin-top: 2rem;
@@ -161,7 +153,23 @@
     width: 100%;
 }
 
-/* Адаптивність */
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+.password-toggle:focus {
+    outline: none;
+}
+
 @media (max-width: 480px) {
     .auth-form {
         padding: 1.5rem;

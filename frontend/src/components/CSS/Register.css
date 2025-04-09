@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-/* Використовуємо ті самі CSS-змінні, що й у Login */
 :root {
     --primary-dark: #1A1A1A;
     --accent-blue: #2D8CFF;
@@ -14,7 +13,6 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Спільний контейнер (як у Login) */
 .auth-container {
     display: flex;
     justify-content: center;
@@ -27,7 +25,6 @@
     padding: 20px;
 }
 
-/* Анімований фон (такий самий, як у Login) */
 .auth-container::before {
     content: '';
     position: absolute;
@@ -47,7 +44,6 @@
     100% { transform: rotate(360deg); }
 }
 
-/* Форма реєстрації */
 .auth-form {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
@@ -70,7 +66,6 @@
     letter-spacing: 1px;
 }
 
-/* Поля вводу (стилі як у Login) */
 .input-group {
     position: relative;
     margin: 1.5rem 0;
@@ -94,7 +89,6 @@
     box-shadow: 0 0 15px rgba(45, 140, 255, 0.3);
 }
 
-/* Іконки (як у Login) */
 .input-icon {
     position: absolute;
     left: 16px;
@@ -105,7 +99,6 @@
     pointer-events: none;
 }
 
-/* Кнопка (стиль як у Login) */
 .auth-button {
     width: 100%;
     padding: 14px;
@@ -125,7 +118,6 @@
     box-shadow: 0 5px 15px rgba(45, 140, 255, 0.3);
 }
 
-/* Повідомлення про помилку */
 .error-message {
     color: #ff6b6b;
     text-align: center;
@@ -133,7 +125,6 @@
     font-size: 0.9rem;
 }
 
-/* Посилання (як у Login) */
 .switch-link {
     text-align: center;
     margin-top: 2rem;
@@ -162,7 +153,39 @@
     width: 100%;
 }
 
-/* Адаптивність (як у Login) */
+.password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+.password-toggle:focus {
+    outline: none;
+}
+
+.input-error {
+    border-color: #ff6b6b !important;
+    box-shadow: 0 0 8px rgba(255, 107, 107, 0.3) !important;
+}
+
+.input-success {
+    border-color: #2D8CFF !important;
+    box-shadow: 0 0 8px rgba(45, 140, 255, 0.3) !important;
+}
+
+.auth-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background: linear-gradient(45deg, #666, #999) !important;
+}
+
 @media (max-width: 480px) {
     .auth-form {
         padding: 1.5rem;
