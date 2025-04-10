@@ -1,20 +1,17 @@
-const express = require('express');
-require('dotenv').config();
-const cors = require('cors');
+import express from 'express';
+import UserRouter from './routes/user_routes.js';
+import AuthRouter from './routes/auth_routes.js';
+import CORS from 'cors';
 
 const app = express();
-const PORT = process.env.PORT || 8000;
-
-// middleware
-app.use(cors());
+app.use(CORS())
 app.use(express.json());
 
-// простий тестовий маршрут
-app.get('/', (req, res) => {
-    res.json({ message: 'Сервер успішно працює!' });
-});
+const enviroment = process.env
 
-// запуск слухача на серверному порту
-app.listen(PORT, () => {
-    console.log(`🚀 Server started on port ${PORT}`);
-});
+app.use('/user', UserRouter)
+app.use('/auth', AuthRouter)
+
+app.listen(enviroment.PORT, () => {
+    console.log(`Server started by url: http://localhost:${enviroment.PORT}`)
+})

@@ -1,0 +1,155 @@
+/* frontend/src/components/CSS/Auth.css */
+
+/* Глобальні стилі */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --primary-dark: #1A1A1A;
+    --accent-blue: #2D8CFF;
+    --accent-purple: #8A2BE2;
+    --text-light: #FFFFFF;
+    --glass-bg: rgba(0, 0, 0, 0.25);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --error-red: #ff6b6b;
+}
+
+/* Загальні стилі для контейнерів */
+.auth-container, .profile-container, .home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100vw;
+    background: var(--primary-dark);
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.auth-container::before {
+    content: '';
+    position: absolute;
+    width: 150%;
+    height: 150%;
+    top: -25%;
+    left: -25%;
+    background:
+            linear-gradient(45deg, var(--accent-purple), transparent 50%),
+            linear-gradient(-45deg, var(--accent-blue), transparent 50%);
+    animation: rotate 20s linear infinite;
+    opacity: 0.1;
+}
+
+/* Форми */
+.auth-form, .profile-content, .home-content {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+    margin: 20px;
+    color: var(--text-light);
+}
+
+/* Елементи форм */
+.input-group {
+    position: relative;
+    margin: 1.5rem 0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px 14px 14px 48px;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.input-group input:focus {
+    border-color: var(--accent-blue);
+    outline: none;
+    box-shadow: 0 0 15px rgba(45, 140, 255, 0.3);
+}
+
+/* Іконки та кнопки */
+.input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 1.2rem;
+}
+
+.auth-button, .logout-button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(45deg, var(--accent-purple), var(--accent-blue));
+    color: var(--text-light);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 1.5rem;
+}
+
+.logout-button {
+    background: #ff4757;
+    width: auto;
+    padding: 0.8rem 1.5rem;
+}
+
+/* Анімації */
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Специфічні стилі для Home */
+.home-container nav a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: var(--transition);
+}
+
+.home-container nav a:hover {
+    color: var(--accent-purple);
+}
+
+/* Медіа-запити */
+@media (max-width: 768px) {
+    .auth-form, .profile-content {
+        padding: 1.5rem;
+        margin: 10px;
+    }
+
+    .input-group input {
+        padding: 12px 12px 12px 40px;
+    }
+}
+
+/* Додаткові утиліти */
+.error-message {
+    color: var(--error-red);
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.password-rules p {
+    font-size: 0.8rem;
+    margin: 0.3rem 0;
+}

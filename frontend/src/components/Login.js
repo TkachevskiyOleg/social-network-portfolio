@@ -1,42 +1,39 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FiUser, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
-import axios from 'axios';
-import backendUrl from '../config';
+import { Link, useNavigate } from 'react-router-dom';
+import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import api from '../api';
 import './CSS/Login.css';
 
 const Login = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${backendUrl}/login`, {
-                username,
-                password
-            });
-            localStorage.setItem('authToken', response.data.token);
-            window.location.href = '/';
+            const { data } = await api.post('/auth/login', { email, password });
+            localStorage.setItem('authToken', data.token);
+            navigate('/profile');
         } catch (err) {
-            setError('Невірний логін або пароль');
+            setError(err.response?.data?.message || 'Login failed. Please try again.');
         }
     };
 
     return (
         <div className="auth-container">
             <form className="auth-form" onSubmit={handleLogin}>
-                <h2>Увійти в систему</h2>
+                <h2>Welcome Back</h2>
 
                 <div className="input-group">
-                    <FiUser className="input-icon" />
+                    <FiMail className="input-icon" />
                     <input
-                        type="text"
-                        placeholder="Логін"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required
                     />
                 </div>
@@ -45,7 +42,7 @@ const Login = () => {
                     <FiLock className="input-icon" />
                     <input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Пароль"
+                        placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
@@ -61,10 +58,10 @@ const Login = () => {
 
                 {error && <p className="error-message">{error}</p>}
 
-                <button type="submit" className="auth-button">Продовжити</button>
+                <button type="submit" className="auth-button">Sign In</button>
 
                 <div className="switch-link">
-                    Немає акаунта? <Link to="/register" className="link">Зареєструватися</Link>
+                    Don't have an account? <Link to="/register" className="link">Sign Up</Link>
                 </div>
             </form>
         </div>
